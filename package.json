@@ -1,0 +1,24 @@
+{
+  "name": "ga_monitor",
+  "version": "1.0.0",
+  "description": "",
+  "dependencies": {
+    "axios": "^1.6.0",
+    "nodemailer": "^6.9.0"
+  },
+  "homepage": "https://github.com/dearlinen/GA_monitor#readme",
+  "bugs": {
+    "url": "https://github.com/dearlinen/GA_monitor/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dearlinen/GA_monitor.git"
+  },
+  "license": "ISC",
+  "author": "",
+  "type": "commonjs",
+  "main": "monitor.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  }
+}

@@ -1,0 +1,39 @@
+name: Bili Bili Monitor
+
+on:
+  schedule:
+    - cron: '*/15 * * * *'  # 每 10 分钟运行一次
+  workflow_dispatch:        # 支持手动触发
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write       # 赋予写权限以更新状态文件
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18'
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Run Monitor
+        env:
+          BILI_API_URL: ${{ secrets.BILI_API_URL }}
+          EMAIL_USER: ${{ secrets.EMAIL_USER }}
+          EMAIL_PASS: ${{ secrets.EMAIL_PASS }}
+          RECEIVER_EMAIL: ${{ secrets.RECEIVER_EMAIL }}
+        run: node monitor.js
+
+      - name: Commit and Push changes
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          git add last_state.json
+          git diff --quiet && git diff --staged --quiet || (git commit -m "Update monitor state" && git push)
