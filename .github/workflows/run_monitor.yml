@@ -2,14 +2,14 @@ name: Bili Bili Monitor
 
 on:
   schedule:
-    - cron: '*/15 * * * *'  # 每 10 分钟运行一次
-  workflow_dispatch:        # 支持手动触发
+    - cron: "*/20 * * * *" # 每 20 分钟运行一次
+  workflow_dispatch: # 支持手动触发
 
 jobs:
   build:
     runs-on: ubuntu-latest
     permissions:
-      contents: write       # 赋予写权限以更新状态文件
+      contents: write # 赋予写权限以更新状态文件
 
     steps:
       - name: Checkout code
@@ -18,7 +18,7 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v3
         with:
-          node-version: '18'
+          node-version: "18"
 
       - name: Install dependencies
         run: npm install
